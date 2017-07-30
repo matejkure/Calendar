@@ -1,0 +1,23 @@
+table.pipi-cal-table {
+	border-collapse: collapse;
+}
+
+.pipi-cal-month, .pipi-cal-schoolWeek, .pipi-cal-week, .pipi-cal-day {
+	border: 1px dotted #ccc;
+	font-family: Calibri, monospace;
+	font-size: 24pt;
+	margin:0;
+	padding: .5em;
+	vertical-align: middle;
+	text-align: center;
+}
+.pipi-cal-month {
+	font-weight: normal;
+}
+
+.pipi-cal-day {
+	border-color: #aaa;
+}
+.pipi-cal-schoolWeek, .pipi-cal-week {
+	font-size: 10pt;
+}

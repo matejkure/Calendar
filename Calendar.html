@@ -10,9 +10,16 @@
 
 	<script type="text/javascript" src="Calendar.js"></script>
 	<script type="text/javascript">
-		//render(document.querySelector(".pipi-cal-container"));
-		//renderInterval("2015-10-01", "2015-12-31", document.querySelector(".pipi-cal-container"));
-		renderYear(2017, document.querySelector(".pipi-cal-container"));
+        var container = document.querySelector(".pipi-cal-container");
+
+        // Renders current month overview
+        //render(container);
+        // Renders interval overview
+        //renderInterval("2015-10-01", "2015-12-31", container));
+        // Renders month overview
+        //renderMonth("2018-02", container);
+        // Renders year overview
+        renderYear(2018, container);
 	</script>
 </body>
 </html>

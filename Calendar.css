@@ -1,23 +1,37 @@
-table.pipi-cal-table {
+.pipical-container {
+	margin: 2em auto;
+}
+table.pipical-table {
 	border-collapse: collapse;
 }
 
-.pipi-cal-month, .pipi-cal-schoolWeek, .pipi-cal-week, .pipi-cal-day {
+.pipical-month, .pipical-schoolWeek, .pipical-week, .pipical-day {
 	border: 1px dotted #ccc;
 	font-family: Calibri, monospace;
 	font-size: 24pt;
+	height: 1.5em;
 	margin:0;
 	padding: .5em;
 	vertical-align: middle;
 	text-align: center;
+	width: 1.5em;
 }
-.pipi-cal-month {
+.pipical-month {
 	font-weight: normal;
 }
 
-.pipi-cal-day {
+.pipical-day {
 	border-color: #aaa;
 }
-.pipi-cal-schoolWeek, .pipi-cal-week {
+.pipical-schoolWeek, .pipical-week {
 	font-size: 10pt;
+}
+
+.pipical-weekend {
+	background-color: #eee;
+}
+
+.pipical-public-holiday {
+	background-color: #eee;
+	font-weight: bold;
 }

@@ -6,6 +6,29 @@
 	<title>Kalendář</title>
 </head>
 <body>
+    <nav id="nav-container">
+        Navigation:
+
+        <div class="navigation">
+            <a href="#year">Year</a>
+            <a href="#month">Month</a>
+            <a href="#interval">Interval</a>
+        </div>
+
+        <div class="nav-year-form">
+            <input type="year" name="year">
+            <button type="button" name="year-button">Render</button>
+        </div>
+
+        <div class="nav-month-form">
+            <button type="button" name="month-previous">Previous</button>
+            <input type="month" name="month">
+            <button type="button" name="month-next">Next</button>
+            <button type="button" name="month-button">Render</button>
+        </div>
+
+
+    </nav>
 	<div class="pipi-cal-container"></div>
 
 	<script type="text/javascript" src="Calendar.js"></script>

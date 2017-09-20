@@ -7,42 +7,53 @@
 </head>
 <body>
     <nav id="nav-container">
-        Navigation:
+        <ul class="nav-navigation">
+            <li><a href="#year">Year</a></li>
+            <li><a href="#month">Month</a></li>
+            <li><a href="#interval">Interval</a></li>
+        </ul>
 
-        <div class="navigation">
-            <a href="#year">Year</a>
-            <a href="#month">Month</a>
-            <a href="#interval">Interval</a>
-        </div>
+		<div class="nav-forms-container">
+			<div class="nav-year-form">
+				<button type="button" name="year-previous">Previous</button>
+				<input type="number" name="year">
+				<button type="button" name="year-next">Next</button>
+	        </div>
 
-        <div class="nav-year-form">
-            <input type="year" name="year">
-            <button type="button" name="year-button">Render</button>
-        </div>
+	        <div class="nav-month-form">
+	            <button type="button" name="month-previous">Previous</button>
+	            <input type="month" name="month">
+	            <button type="button" name="month-next">Next</button>
+	        </div>
 
-        <div class="nav-month-form">
-            <button type="button" name="month-previous">Previous</button>
-            <input type="month" name="month">
-            <button type="button" name="month-next">Next</button>
-            <button type="button" name="month-button">Render</button>
-        </div>
-
-
+			<div class="nav-interval-form">
+				<label for="">From:</label>
+				<input type="date" name="interval-begin" value="">
+				<label for="">To:</label>
+				<input type="date" name="interval-end" value="">
+				<button type="button" name="interval-render">Show</button>
+			</div>
+		</div>
     </nav>
-	<div class="pipi-cal-container"></div>
+
+	<div class="pipical-container"></div>
+	<div class="pipical-container"></div>
 
 	<script type="text/javascript" src="Calendar.js"></script>
 	<script type="text/javascript">
-        var container = document.querySelector(".pipi-cal-container");
+        var container = document.querySelectorAll(".pipical-container");
 
         // Renders current month overview
-        //render(container);
-        // Renders interval overview
-        //renderInterval("2015-10-01", "2015-12-31", container));
+        // render(container[0]);
+
         // Renders month overview
-        //renderMonth("2018-02", container);
-        // Renders year overview
-        renderYear(2018, container);
+        // renderMonth("2017-10", container[0]);
+
+		// Renders interval overview
+        renderInterval("2017-10-01", "2018-12-31", container[1]);
+
+		// Renders year overview
+        // renderYear(2018, container[1]);
 	</script>
 </body>
 </html>

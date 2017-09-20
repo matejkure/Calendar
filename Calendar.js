@@ -205,11 +205,15 @@ function renderInterval(begin, end, container) {
 
 		if (presentDate.valueOf() == beginDate.valueOf()) {
 			row = document.createElement("tr");
+			row.classList.add("pipical-month-start");
 			rows++;
 
 			cellMonth = document.createElement("th");
 			cellMonth.classList.add("pipical-month");
-			cellMonth.innerText = months[presentDate.getMonth()];
+
+			var span = document.createElement("span");
+			span.innerText = months[presentDate.getMonth()];
+			cellMonth.appendChild(span);
 			row.appendChild(cellMonth);
 
 			cell = document.createElement("td");
@@ -226,6 +230,9 @@ function renderInterval(begin, end, container) {
 			for (i=0; i < presentDay; i++) {
 				cell = document.createElement("td");
 				cell.classList.add("pipical-day");
+				if (i == 5 || i== 6) {
+					cell.classList.add("pipical-weekend");
+				}
 				row.appendChild(cell);
 			}
 		}
@@ -239,22 +246,30 @@ function renderInterval(begin, end, container) {
 			for (i=previousDay+1; i < 7; i++) {
 				cell = document.createElement("td");
 				cell.classList.add("pipical-day");
+				if (i == 5 || i== 6) {
+					cell.classList.add("pipical-weekend");
+				}
 				row.appendChild(cell);
 			}
 
 			cellMonth.rowSpan = rows;
 			rows = 0;
+			row.classList.add("pipical-month-end");
 			tbody.appendChild(row);
 
 			currentMonth = presentDate.getMonth();
 
 			row = document.createElement("tr");
 			row.classList.add("pipical-row");
+			row.classList.add("pipical-month-start");
 			rows++;
 
 			cellMonth = document.createElement("th");
 			cellMonth.classList.add("pipical-month");
-			cellMonth.innerText = months[presentDate.getMonth()];
+
+			var span = document.createElement("span");
+			span.innerText = months[presentDate.getMonth()];
+			cellMonth.appendChild(span);
 			row.appendChild(cellMonth);
 
 			cell = document.createElement("td");
@@ -270,6 +285,9 @@ function renderInterval(begin, end, container) {
 			for (i=0; i < presentDay; i++) {
 				cell = document.createElement("td");
 				cell.classList.add("pipical-day");
+				if (i == 5 || i== 6) {
+					cell.classList.add("pipical-weekend");
+				}
 				row.appendChild(cell);
 			}
 		}
@@ -278,7 +296,6 @@ function renderInterval(begin, end, container) {
 			tbody.appendChild(row);
 
 			row = document.createElement("tr");
-			row.classList.add("pipical-row");
 			rows++;
 
 			cell = document.createElement("td");
@@ -313,147 +330,21 @@ function renderInterval(begin, end, container) {
 				cell.classList.add("pipical-day");
 				row.appendChild(cell);
 			}
+
+			cellMonth.rowSpan = rows;
+			rows = 0;
+
+			row.classList.add("pipical-month-end");
+			tbody.appendChild(row);
 		}
 
-		var pd = new Date(presentDate.valueOf() + 86400000);
-		presentDate = new Date(pd.getFullYear(), pd.getMonth(), pd.getDate(), 12);
+		presentDate = new Date(presentDate.valueOf() + 86400000);
+		presentDate.setHours(12);
 
-
-
-		/*
-		 * OLD ALGORITHM
-		 */
-		// zachycení dalšího měsíce
-		// if (currentMonth != presentDate.getMonth()) {
-		// 	var previous = new Date(presentDate.valueOf() - 86400000);
-		// 	var previousDay = (previous.getDay() + 6) % 7;
-		//
-		// 	if (previousDay != 6) {
-		// 		// fill rest of row with empty fields
-		// 		for (i=previousDay+1; i < 7; i++) {
-		// 			cell = document.createElement("td");
-		// 			cell.classList.add("pipi-cal-day");
-		// 			row.appendChild(cell);
-		// 		}
-		//
-		// 		row.classList.add("pipi-cal-row");
-		// 		tbody.appendChild(row);
-		// 		cellMonth.rowSpan = rows;
-		//
-		// 		// reset čítadla řádků
-		// 		rows = 0;
-		// 	}
-		// 	else {
-		// 		cellMonth.rowSpan = rows-1;
-		// 	}
-		//
-		// 	//nový měsíc = aktuální
-		// 	currentMonth = presentDate.getMonth();
-		//
-		// 	// reset čítadla řádků a dnů
-		// 	rows = 0;
-		// 	days = 0;
-		//
-		// 	// buňky pro nový měsíc
-		// 	if (previousDay != 6) {
-		// 	//if (previous.getDay()) {
-		// 		row = document.createElement("tr");
-		// 		rows++;
-		//
-		// 		cellMonth = document.createElement("th");
-		// 		cellMonth.innerText = months[presentDate.getMonth()];
-		// 		cellMonth.classList.add("pipi-cal-month");
-		//
-		// 		row.appendChild(cellMonth);
-		//
-		// 		cell = document.createElement("td");
-		// 		cell.classList.add("pipi-cal-schoolWeek");
-		// 		row.appendChild(cell);
-		//
-		// 		cell = document.createElement("td");
-		// 		cell.innerText = getISOWeek(presentDate);
-		// 		cell.classList.add("pipi-cal-week");
-		// 		row.appendChild(cell);
-		// 	}
-		// 	else {
-		// 		cellMonth = document.createElement("th");
-		// 		cellMonth.innerText = months[presentDate.getMonth()];
-		// 		cellMonth.classList.add("pipi-cal-month");
-		//
-		// 		row.insertBefore(cellMonth, row.childNodes[0]);
-		// 		rows++;
-		// 	}
-		//
-		// 	// ofset měsíce
-		// 	beginDay = presentDay;
-		//
-		// 	while (beginDay) {
-		// 		cell = document.createElement("td");
-		// 		cell.classList.add("pipi-cal-day");
-		// 		row.appendChild(cell);
-		//
-		// 		beginDay--;
-		// 	}
-		//
-		// }
-
-		// cell = document.createElement("td");
-		// cell.innerText = presentDate.getDate();
-		// cell.classList.add("pipi-cal-day");
-		//
-		// // colors weekend
-		// if (presentDay == 5 || presentDay == 6) {
-		// 	cell.classList.add("pipi-cal-weekend");
-		// }
-		//
-		// // color public holidays
-		// if (typeof(publicHolidays[date2ISOstr(presentDate)]) != "undefined") {
-		// 	cell.classList.add("pipi-cal-public-holiday");
-		// }
-		//
-		// row.appendChild(cell);
-
-		// next day
-		//presentDate = new Date (presentDate.valueOf() + 86400000); // 24*60*60*1000
-
-		// if (presentDate < endDate) {
-		// 	if (presentDay == 6) {
-		// 	// if (!(days%7)) {
-		// 		row.classList.add("pipi-cal-row");
-		// 		tbody.appendChild(row);
-		//
-		// 		row = document.createElement("tr");
-		// 		rows++;
-		//
-		// 		cell = document.createElement("td");
-		// 		cell.classList.add("pipi-cal-schoolWeek");
-		// 		row.appendChild(cell);
-		//
-		// 		cell = document.createElement("td");
-		// 		cell.innerText = getISOWeek(presentDate);
-		// 		cell.classList.add("pipi-cal-week");
-		// 		row.appendChild(cell);
-		// 	}
-		// }
 	}
-
-	// Finish row with blank spaces
-	var day = (presentDate.getDay() + 6) % 7;
-
-	for (i=day; i < 6; i++) {
-		cell = document.createElement("td");
-		cell.classList.add("pipi-cal-day");
-		row.appendChild(cell);
-		days++;
-	}
-
-	row.classList.add("pipi-cal-row");
-	tbody.appendChild(row);
-
-	cellMonth.rowSpan = rows;
 
 	// appends table into container
-	table.classList.add("pipi-cal", "pipi-cal-table");
+	table.classList.add("pipi-cal", "pipical-table");
 	container.appendChild(table);
 }
 

@@ -1,0 +1,103 @@
+<html><head>
+	<meta charset="utf-8">
+	<link rel="stylesheet" href="Calendar.css">
+	<title>Kalendář</title>
+</head>
+<body>
+
+	<div class="pipical-container">
+        <table class="pipical-table pipi-cal pipi-cal-table">
+            <thead class="pipical-header">
+                <tr class="pipical-row">
+                    <td class="pipical-month"></td>
+                    <td class="pipical-schoolWeek"></td>
+                    <td class="pipical-week"></td>
+                    <td class="pipical-day">Po</td>
+                    <td class="pipical-day">Út</td>
+                    <td class="pipical-day">St</td>
+                    <td class="pipical-day">Čt</td>
+                    <td class="pipical-day">Pá</td>
+                    <td class="pipical-day">So</td>
+                    <td class="pipical-day">Ne</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th class="pipical-month" rowspan="5">leden</th>
+                    <td class="pipical-schoolWeek">sw</td>
+                    <td class="pipical-week">1</td>
+                    <td class="pipical-day pipical-public-holiday">1</td>
+                    <td class="pipical-day">2</td>
+                    <td class="pipical-day">3</td>
+                    <td class="pipical-day">4</td>
+                    <td class="pipical-day">5</td>
+                    <td class="pipical-day pipical-weekend">6</td>
+                    <td class="pipical-day pipical-weekend">7</td>
+                </tr>
+                <tr class="pipical-row">
+                    <td class="pipical-schoolWeek">sw</td>
+                    <td class="pipical-week">2</td>
+                    <td class="pipical-day">8</td>
+                    <td class="pipical-day">9</td>
+                    <td class="pipical-day">10</td>
+                    <td class="pipical-day">11</td>
+                    <td class="pipical-day">12</td>
+                    <td class="pipical-day pipical-weekend">13</td>
+                    <td class="pipical-day pipical-weekend">14</td>
+                </tr>
+                <tr class="pipical-row">
+                    <td class="pipical-schoolWeek">sw</td>
+                    <td class="pipical-week">3</td>
+                    <td class="pipical-day">15</td>
+                    <td class="pipical-day">16</td>
+                    <td class="pipical-day">17</td>
+                    <td class="pipical-day">18</td>
+                    <td class="pipical-day">19</td>
+                    <td class="pipical-day pipical-weekend">20</td>
+                    <td class="pipical-day pipical-weekend">21</td>
+                </tr>
+                <tr class="pipical-row">
+                    <td class="pipical-schoolWeek">sw</td>
+                    <td class="pipical-week">4</td>
+                    <td class="pipical-day">22</td>
+                    <td class="pipical-day">23</td>
+                    <td class="pipical-day">24</td>
+                    <td class="pipical-day">25</td>
+                    <td class="pipical-day">26</td>
+                    <td class="pipical-day pipical-weekend">27</td>
+                    <td class="pipical-day pipical-weekend">28</td>
+                </tr>
+                <tr class="pipical-row">
+                    <td class="pipical-schoolWeek">sw</td>
+                    <td class="pipical-week">5</td>
+                    <td class="pipical-day">29</td>
+                    <td class="pipical-day">30</td>
+                    <td class="pipical-day">31</td>
+                    <td class="pipical-day"></td>
+                    <td class="pipical-day"></td>
+                    <td class="pipical-day"></td>
+                    <td class="pipical-day"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+	<script type="text/javascript" src="Calendar.js"></script>
+	<script type="text/javascript">
+        var container = document.querySelectorAll(".pipical-container");
+
+        // Renders current month overview
+        // render(container[0]);
+
+        // Renders month overview
+         renderMonth("2018-01", container[0]);
+
+		// Renders interval overview
+        //renderInterval("2017-10-01", "2017-12-31", container[1]));
+
+		// Renders year overview
+        // renderYear(2018, container[1]);
+	</script>
+
+
+</body></html>

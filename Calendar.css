@@ -6,7 +6,6 @@ table.pipical-table {
 }
 
 .pipical-month, .pipical-schoolWeek, .pipical-week, .pipical-day {
-	border: 1px dotted #ccc;
 	font-family: Calibri, monospace;
 	font-size: 24pt;
 	height: 1.5em;
@@ -19,9 +18,9 @@ table.pipical-table {
 .pipical-month {
 	font-weight: normal;
 }
-
-.pipical-day {
-	border-color: #aaa;
+.pipical-month span {
+	display: inline-block;
+	transform: rotate(-90deg);
 }
 .pipical-schoolWeek, .pipical-week {
 	font-size: 10pt;
@@ -34,4 +33,29 @@ table.pipical-table {
 .pipical-public-holiday {
 	background-color: #eee;
 	font-weight: bold;
+}
+
+tbody .pipical-day {
+	border: 1px dotted #ccc;
+}
+
+/*
+ * Testing CSS
+ */
+tbody .pipical-day:first-child{
+	border: 1px dotted #ccc;
+}
+
+tbody tr td:nth-of-type(3) {
+	border-left: 2px solid #bbb;
+}
+tbody tr td:last-of-type {
+	border-right: 2px solid #bbb;
+}
+
+tbody tr.pipical-month-start .pipical-day {
+	border-top: 2px solid #bbb;
+}
+tbody tr.pipical-month-end .pipical-day {
+	border-bottom: 2px solid #bbb;
 }

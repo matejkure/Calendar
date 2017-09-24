@@ -59,10 +59,10 @@ var publicHolidays = {
 };
 
 var periods = {
-	semester: [["2017-10-02", "2018-01-07"], ["2018-02-01", "2018-02-14"]],
-	semesterHoliday: [["2017-07-03", "2017-09-29"]],
 	holidays: [],
-	exams: [["2018-01-18", "2017-01-31"], ["2017-05-29", "2017-06-30"]]
+	exams: [["2018-01-11", "2018-02-16"], ["2018-05-28", "2018-06-29"]],
+    semesters: [["2017-10-02", "2018-01-10"], ["2018-02-19", "2018-05-25"]],
+    semesterHolidays: [["2017-12-23", "2017-12-31"]]
 };
 
 
@@ -100,9 +100,63 @@ function getISOWeek (date) {
 	return 1 + Math.ceil((thursday - target)/ 604800000); // 604800000 = 7 * 24 * 3600 * 1000
 }
 
-function getSchoolWeek (date) {
+function getExamWeek (date) {
+    for (var i in periods.exams) {
+        var exam = periods.exams[i];
+        var start = str2date(exam[0]);
+        var end = str2date(exam[1]);
+        var day = (start.getDay() + 6) % 7;
 
-	return "sw";
+        if (day != 0) {
+            start.setDate(start.getDate() - day);
+        }
+
+        if (date >= start && date <= end) {
+            var target = new Date(date.valueOf());
+            dayNumber = (target.getDay() + 6) % 7;
+
+            if (dayNumber != 0) {
+                target.setDate(target.getDate() - dayNumber);
+            }
+
+            var examWeek = 1 + Math.ceil((target.valueOf() - start.valueOf()) / 604800000);
+
+            switch (examWeek) {
+                case 1: return "I";
+                case 2: return "II";
+                case 3: return "III";
+                case 4: return "IV";
+                case 5: return "V";
+                case 6: return "VI";
+                default: return examWeek;
+            }
+        }
+    }
+    return "";
+}
+
+function getSchoolWeek (date) {
+    for (i in periods.semesters) {
+        var semester = periods.semesters[i];
+        if (date >= str2date(semester[0]) && date <= str2date(semester[1])) {
+            target = new Date(date.valueOf());
+            dayNumber = (target.getDay() + 6) % 7;
+
+            target.setDate(target.getDate() - dayNumber);
+
+            monday = target.valueOf();
+
+            target = str2date(semester[0]);
+            dayNumber = (target.getDay() + 6) % 7;
+
+            target.setDate(target.getDate() - dayNumber);
+
+
+            // calculate
+            return 1 + Math.ceil((monday - target.valueOf()) / 604800000);
+        }
+    }
+    return "";
 }
 
 
@@ -154,6 +208,8 @@ function renderInterval(begin, end, container) {
 	table.appendChild(tbody);
 
 	var row, cell, cellMonth;
+
+	var outdated = true;
 
 	var beginDate = str2date(begin);
 	var endDate	  = str2date(end);
@@ -211,13 +267,19 @@ function renderInterval(begin, end, container) {
 			cellMonth = document.createElement("th");
 			cellMonth.classList.add("pipical-month");
 
-			var span = document.createElement("span");
+            var span = document.createElement("span");
 			span.innerText = months[presentDate.getMonth()];
+            span.classList.add("pipical-month-month");
 			cellMonth.appendChild(span);
+
+            var span2 = document.createElement("span");
+            span2.innerText = presentDate.getFullYear();
+            span2.classList.add("pipical-month-year");
+            span.appendChild(span2);
 			row.appendChild(cellMonth);
 
 			cell = document.createElement("td");
-			cell.innerText = getSchoolWeek(presentDate)
+			cell.innerText = getSchoolWeek(presentDate);
 			cell.classList.add("pipical-schoolWeek");
 			row.appendChild(cell);
 
@@ -233,6 +295,16 @@ function renderInterval(begin, end, container) {
 				if (i == 5 || i== 6) {
 					cell.classList.add("pipical-weekend");
 				}
+
+				if (outdated) {
+					var _date = new Date(presentDate.valueOf() - (presentDay - i) * 86400000);
+					cell.innerText = _date.getDate();
+					cell.classList.add("pipical-out");
+                    if (publicHolidays[date2ISOstr(_date)] != undefined) {
+            			cell.classList.add("pipical-public-holiday")
+            		}
+				}
+
 				row.appendChild(cell);
 			}
 		}
@@ -269,11 +341,17 @@ function renderInterval(begin, end, container) {
 
 			var span = document.createElement("span");
 			span.innerText = months[presentDate.getMonth()];
+            span.classList.add("pipical-month-month");
 			cellMonth.appendChild(span);
+
+            var span2 = document.createElement("span");
+            span2.innerText = presentDate.getFullYear();
+            span2.classList.add("pipical-month-year");
+            span.appendChild(span2);
 			row.appendChild(cellMonth);
 
 			cell = document.createElement("td");
-			cell.innerText = getSchoolWeek(presentDate)
+			cell.innerText = getSchoolWeek(presentDate);
 			cell.classList.add("pipical-schoolWeek");
 			row.appendChild(cell);
 
@@ -299,7 +377,7 @@ function renderInterval(begin, end, container) {
 			rows++;
 
 			cell = document.createElement("td");
-			cell.innerText = getSchoolWeek(presentDate)
+			cell.innerText = getSchoolWeek(presentDate);
 			cell.classList.add("pipical-schoolWeek");
 			row.appendChild(cell);
 
@@ -328,6 +406,16 @@ function renderInterval(begin, end, container) {
 			for (i=presentDay+1; i < 7; i++) {
 				cell  = document.createElement("td");
 				cell.classList.add("pipical-day");
+
+				if (i==5 || i==6) {
+					cell.classList.add("pipical-weekend");
+				}
+
+				if (outdated) {
+					var _date = new Date(presentDate.valueOf() + (i - presentDay) * 86400000);
+					cell.innerText = _date.getDate();
+					cell.classList.add("pipical-out");
+				}
 				row.appendChild(cell);
 			}
 
@@ -344,7 +432,7 @@ function renderInterval(begin, end, container) {
 	}
 
 	// appends table into container
-	table.classList.add("pipi-cal", "pipical-table");
+	table.classList.add("pipical", "pipical-table");
 	container.appendChild(table);
 }
 

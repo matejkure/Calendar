@@ -18,9 +18,16 @@ table.pipical-table {
 .pipical-month {
 	font-weight: normal;
 }
-.pipical-month span {
+.pipical-month span.pipical-month-month {
 	display: inline-block;
 	transform: rotate(-90deg);
+}
+.pipical-month-year {
+    color: #eee;
+    font-size: 12pt;
+}
+.pipical-month-month:hover .pipical-month-year {
+    color: #f3a;
 }
 .pipical-schoolWeek, .pipical-week {
 	font-size: 10pt;
@@ -33,6 +40,10 @@ table.pipical-table {
 .pipical-public-holiday {
 	background-color: #eee;
 	font-weight: bold;
+}
+
+.pipical-out {
+	color: #ccc;
 }
 
 tbody .pipical-day {
